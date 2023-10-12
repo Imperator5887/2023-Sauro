@@ -6,15 +6,19 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.intakeConstants;
 
+/**CREATES THE SUBSYSTEM OF THE INTAKE */
 public class intakeSubsystem extends SubsystemBase{
 
+    /**Instance of the system */
     private static intakeSubsystem instance;
 
+    /**Motor */
     private final CANSparkMax motor;
 
-
+    /**Constructor of the system */
     public intakeSubsystem(){
 
+        /**Initialization of the motor */
         motor = new CANSparkMax(intakeConstants.motorID, MotorType.kBrushless);
         motor.restoreFactoryDefaults();  
         motor.setInverted(true);  
@@ -22,6 +26,10 @@ public class intakeSubsystem extends SubsystemBase{
 
     }
 
+    /**
+     * Gets the instance of the subsystem
+     * @return {@intakeSubsystem} singleton instance
+     */
     public static intakeSubsystem getInstance(){
         if(instance == null){
             instance = new intakeSubsystem();
@@ -29,6 +37,10 @@ public class intakeSubsystem extends SubsystemBase{
         return instance;
     }
 
+    /**
+     * Sets the velocity for each picking mode (cone [true] // cube [false])
+     * @param isPickingCone 
+     */
     public void setPiecePickingMode(boolean isPickingCone){
 
         if(isPickingCone){
@@ -39,6 +51,11 @@ public class intakeSubsystem extends SubsystemBase{
 
     }
 
+
+    /**
+     * Sets the Idle mode to use afterpicking a certain piece
+     * @param isPickingCone
+     */
     public void setIdleMode(boolean isPickingCone){
 
         if(isPickingCone){
@@ -49,7 +66,10 @@ public class intakeSubsystem extends SubsystemBase{
 
     }
 
-
+    /**
+     * Sets the velocity for the motor
+     * @param velocity
+     */
     public void setVelocity(double velocity){
         motor.set(velocity);
     }
