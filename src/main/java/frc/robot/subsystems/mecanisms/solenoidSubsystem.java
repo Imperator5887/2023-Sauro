@@ -5,15 +5,21 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
+/**Creates the subsystem for the solenoid */
 public class solenoidSubsystem extends SubsystemBase {
 
+  /**Creates the solenoid */
   private final Solenoid solenoide;
 
+  /**Instance of the subsystem */
   private static solenoidSubsystem instance;
 
   /** Creates a new ExampleSubsystem. */
   public solenoidSubsystem() {
 
+    /**
+     * Initialization for the solenoid
+     */
     solenoide = new Solenoid(PneumaticsModuleType.REVPH, 14);
     
   }
@@ -21,10 +27,17 @@ public class solenoidSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
 
+    /**
+     * SHUFFLEBOARD
+     */
     SmartDashboard.putBoolean("Solenoid State", solenoide.get());
 
   }
 
+  /**
+   * Gets the instance of the solenoid
+   * @return {@solenoidSubsystem} singleton instance
+   */
   public static solenoidSubsystem getInstance(){
 
     if(instance == null){
@@ -35,14 +48,14 @@ public class solenoidSubsystem extends SubsystemBase {
 
   }
 
+  /**
+   * Sets the solenoid state
+   * @param on
+   */
   public void set(boolean on){
     
     solenoide.set(on);
 
   }
 
-  @Override
-  public void simulationPeriodic() {
-    // This method will be called once per scheduler run during simulation
-  }
 }
