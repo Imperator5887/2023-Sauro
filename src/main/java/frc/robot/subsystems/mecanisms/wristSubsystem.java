@@ -1,3 +1,9 @@
+/**
+ * Writen by Armando Mac Beath
+ * 
+ * {@MÆTH}
+ */
+
 package frc.robot.subsystems.mecanisms;
 
 import com.revrobotics.AbsoluteEncoder;
@@ -13,43 +19,66 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.lib.math.Functions;
 import frc.robot.Constants.wristConstants;
 
+/**
+ * Creates the subsystem for the wrist
+ */
 public class wristSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
 
+  //subsystem instance
   private static wristSubsystem instance;
 
+  /**
+   * Motors and encoders
+   */
   private final CANSparkMax motor;
 
   private final AbsoluteEncoder absoluteEncoder;
 
   private final RelativeEncoder encoder;
 
+  /**PID */
   private final ProfiledPIDController pidController;
 
 
-
+  /**
+   * Subsystem's constrtuctor
+   */
   public wristSubsystem() {
 
+    /**
+     * Initialization for the motor
+     */
     motor = new CANSparkMax(15, MotorType.kBrushless);
     motor.restoreFactoryDefaults();
     motor.setIdleMode(IdleMode.kBrake);
     motor.setInverted(true);
 
+    /**
+    * Initialization for the relative encoder
+    */
     encoder = motor.getEncoder();
     encoder.setPositionConversionFactor(0.05);
 
-
+    /**
+     * Initialization for the absolute encoder
+     */
     absoluteEncoder = motor.getAbsoluteEncoder(Type.kDutyCycle);
     absoluteEncoder.setInverted(true);
     absoluteEncoder.setZeroOffset(wristConstants.offset);
 
-    
+    /**
+     * Initialization for the PID Controller
+     */
     pidController = new ProfiledPIDController(
         wristConstants.kP, 
         wristConstants.kI, 
         wristConstants.kD, 
         wristConstants.constraints);
 
+        /**
+         * Init config
+         */
         resetEncoders();
         motor.burnFlash();
   }
@@ -57,14 +86,22 @@ public class wristSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
 
+    /**
+     * SHUFFLBOARD
+     */
     SmartDashboard.putNumber("Wrist ABSOLUTE Position", getAbsolutePosition());
     SmartDashboard.putNumber("Wrist RELATIVE Position", getPosition());
-
     SmartDashboard.putNumber("OUTPUT WRIST", motor.getAppliedOutput());
 
   }
 
+  /**
+   * Function to set the velocity of the wristt
+   * @param velocity
+   */
   public void setVelocity(double velocity){
+    
+    //Add a treshold
     if(velocity < 0.08 && velocity > -0.08){
 
       motor.stopMotor();
@@ -74,6 +111,10 @@ public class wristSubsystem extends SubsystemBase {
     
   }
 
+  /**
+   * Get the instance of the subsystem
+   * @return {@wristSusbystem} singleton instance
+   */
   public static wristSubsystem getInstance(){
 
     if(instance == null){
@@ -83,7 +124,9 @@ public class wristSubsystem extends SubsystemBase {
     return instance;
   }
 
-
+  /**
+   * Function to return the wrist to rolled up position
+   */
   public void setToHome(){
     if(absoluteEncoder.getPosition() > 0.06){
     pidController.setGoal(0.06);
@@ -96,6 +139,10 @@ public class wristSubsystem extends SubsystemBase {
     }
   }
 
+  /**
+   * Function to get whether the wrist is in home position or not
+   * @return isInHome?
+   */
   public boolean isInHome(){
 
     if(getPosition() < 0.05){
@@ -105,31 +152,43 @@ public class wristSubsystem extends SubsystemBase {
     }
   }
 
-  public void setGoal(double goal){
+  /**
+   * Sends the wrist to the desired goal
+   * @param desiredGoal
+   */
+  public void setGoal(double desiredGoal){
 
-    pidController.setGoal(goal);
+    pidController.setGoal(desiredGoal);
     double pidOutput = pidController.calculate(encoder.getPosition());
     
         motor.set(pidOutput); 
 
   }
 
+  /**
+   * Gets the position of the relative encoder
+   * @return position of the encoder
+   */
   public double getPosition(){
 
     return encoder.getPosition();
 
   }
 
+  /**
+   * Gets the position of the absolute encoder
+   * @return absolute encoder's position
+   */
   public double getAbsolutePosition(){
     return absoluteEncoder.getPosition();
   }
 
+  /**
+   * Sends the position of the absolute encoder to the relative encoder
+   */
   public void resetEncoders(){
     encoder.setPosition(getAbsolutePosition());
   }
 
-  @Override
-  public void simulationPeriodic() {
-    // This method will be called once per scheduler run during simulation
-  }
+
 }
