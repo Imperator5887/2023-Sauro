@@ -96,7 +96,7 @@ public class wristSubsystem extends SubsystemBase {
   }
 
   /**
-   * Function to set the velocity of the wristt
+   * Function to set the velocity of the wrist
    * @param velocity
    */
   public void setVelocity(double velocity){
@@ -113,7 +113,7 @@ public class wristSubsystem extends SubsystemBase {
 
   /**
    * Get the instance of the subsystem
-   * @return {@wristSusbystem} singleton instance
+   * @return {@wristSubsystem} singleton instance
    */
   public static wristSubsystem getInstance(){
 
