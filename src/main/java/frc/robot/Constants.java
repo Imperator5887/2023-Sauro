@@ -277,9 +277,9 @@ public class Constants {
                         new TrapezoidProfile.Constraints(maxVelocity, maxAcceleration);
                     
     
-        public static final double pickingPose = 1.56;
+        public static final double pickingPose = 1.52;
         public static final double homePosition = 0.02;
-        public static final double placePosition = 0.5;
+        public static final double placePosition = 0.55;
         
 
 
@@ -304,12 +304,12 @@ public class Constants {
 
         public static double kP = 0.8;
         public static double kI = 0;
-        public static double kD = 0;
+        public static double kD = 0.12;
 
-        public static double offset = 0.07;
+        public static double offset = 0.22;
 
-        public static double maxVelocity = 30;
-        public static double maxAcceleration = 30;
+        public static double maxVelocity = 25;
+        public static double maxAcceleration = 25;
 
         public static double maxPosition = 0.03;
 
@@ -318,9 +318,9 @@ public class Constants {
         public static TrapezoidProfile.Constraints constraints =
                       new TrapezoidProfile.Constraints(maxVelocity, maxAcceleration);
 
-        public static final double pickingPose = 0.28;
+        public static final double pickingPose = 0.38;
         public static final double cubeHighPose = 0.33;
-        public static final double cubeMidPose = 0.37;
+        public static final double cubeMidPose = 0.43;
         public static final double homePose = 0.08;
 
     }

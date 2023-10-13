@@ -1,6 +1,7 @@
 package frc.robot.subsystems.mecanisms;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -15,13 +16,18 @@ public class intakeSubsystem extends SubsystemBase{
     /**Motor */
     private final CANSparkMax motor;
 
+    private final RelativeEncoder encoder;
+
     /**Constructor of the system */
     public intakeSubsystem(){
 
         /**Initialization of the motor */
         motor = new CANSparkMax(intakeConstants.motorID, MotorType.kBrushless);
         motor.restoreFactoryDefaults();  
-        motor.setInverted(true);  
+        motor.setInverted(true); 
+        
+        encoder = motor.getEncoder();
+        encoder.setPositionConversionFactor(0.2);
     
 
     }
@@ -74,4 +80,29 @@ public class intakeSubsystem extends SubsystemBase{
         motor.set(velocity);
     }
 
+    /**
+     * Gets the position of the roller
+     * @return encoder's position
+     */
+    public double getPosition(){
+       return encoder.getPosition();
+    }
+
+    /**
+     * Whether has it pick the piece or no
+     * @return has pick?
+     
+    public boolean hasPick(boolean isPickingCone, boolean isInAuto){
+        
+
+        switch
+
+    }
+
+    /**
+     * stops the motor 
+     */
+    public void stop(){
+        motor.stopMotor();
+    }
 }

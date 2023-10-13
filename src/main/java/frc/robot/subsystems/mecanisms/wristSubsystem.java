@@ -35,7 +35,7 @@ public class wristSubsystem extends SubsystemBase {
 
   private final AbsoluteEncoder absoluteEncoder;
 
-  private final RelativeEncoder encoder;
+  //private final RelativeEncoder encoder;
 
   /**PID */
   private final ProfiledPIDController pidController;
@@ -56,10 +56,10 @@ public class wristSubsystem extends SubsystemBase {
 
     /**
     * Initialization for the relative encoder
-    */
-    encoder = motor.getEncoder();
+    
+    //encoder = motor.getEncoder();
     encoder.setPositionConversionFactor(0.05);
-
+*/
     /**
      * Initialization for the absolute encoder
      */
@@ -78,9 +78,9 @@ public class wristSubsystem extends SubsystemBase {
 
         /**
          * Init config
-         */
+         
         resetEncoders();
-        motor.burnFlash();
+        motor.burnFlash();*/
   }
 
   @Override
@@ -102,11 +102,11 @@ public class wristSubsystem extends SubsystemBase {
   public void setVelocity(double velocity){
     
     //Add a treshold
-    if(velocity < 0.08 && velocity > -0.08){
+    if(velocity < 0.05 && velocity > -0.05){
 
       motor.stopMotor();
     } else {
-      motor.set(velocity * 0.5);
+      motor.set(velocity * 0.3);
     }
     
   }
@@ -159,10 +159,26 @@ public class wristSubsystem extends SubsystemBase {
   public void setGoal(double desiredGoal){
 
     pidController.setGoal(desiredGoal);
-    double pidOutput = pidController.calculate(encoder.getPosition());
+    double pidOutput = pidController.calculate(absoluteEncoder.getPosition());
     
         motor.set(pidOutput); 
 
+  }
+
+  /**
+   * Whether the arm has returned to rolledup position
+   * @return is in home?
+   */
+  public boolean isInGolePosition(){
+
+    boolean isInGoal;
+    if(pidController.getSetpoint().velocity == 0.0 ){
+        isInGoal = true;
+    } else {
+        isInGoal = false;
+    }
+
+    return isInGoal;
   }
 
   /**
@@ -171,7 +187,7 @@ public class wristSubsystem extends SubsystemBase {
    */
   public double getPosition(){
 
-    return encoder.getPosition();
+    return absoluteEncoder.getPosition();
 
   }
 
@@ -185,10 +201,10 @@ public class wristSubsystem extends SubsystemBase {
 
   /**
    * Sends the position of the absolute encoder to the relative encoder
-   */
+   
   public void resetEncoders(){
     encoder.setPosition(getAbsolutePosition());
-  }
+  }*/
 
 
 }

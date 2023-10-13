@@ -5,21 +5,21 @@ import java.util.function.Supplier;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.mecanisms.telescopicSubsystem;
 
-public class setTelescopicVelocityCommand extends CommandBase {
+public class setTelescopicPosition extends CommandBase {
 
     private final telescopicSubsystem arm;
     //private final double desiredGoal;
-    private final Supplier<Double> velocity;
+    private final double goal;
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public setTelescopicVelocityCommand(Supplier<Double> velocity) {
+  public setTelescopicPosition(double goal) {
 
     arm = telescopicSubsystem.getInstance();
 
-    this.velocity = velocity;
+    this.goal = goal;
     
     addRequirements(arm);
   }
@@ -37,7 +37,7 @@ public class setTelescopicVelocityCommand extends CommandBase {
 
     arm.periodic();
 
-    arm.setVelocity(velocity.get());
+    arm.setVelocity(goal);
     
   }
 
@@ -52,6 +52,6 @@ public class setTelescopicVelocityCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return arm.isInGolePosition(goal);
   }
 }

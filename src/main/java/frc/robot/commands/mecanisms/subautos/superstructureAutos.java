@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.Constants.pivotingConstants;
 import frc.robot.Constants.wristConstants;
+import frc.robot.commands.mecanisms.intake.intakeCommand;
 import frc.robot.commands.mecanisms.pivoting.pivotPIDCommand;
 import frc.robot.commands.mecanisms.wrist.setWristPosition;
 import frc.robot.subsystems.mecanisms.intakeSubsystem;
@@ -40,6 +41,16 @@ public class superstructureAutos {
 
     }
 
+    public static Command pickCube(){
+
+        return 
+        Commands.parallel(
+            new pivotPIDCommand(pivotingConstants.pickingPose),
+            new setWristPosition(wristConstants.pickingPose)
+        );
+
+    }
+
     public static Command homePosition(){
 
         return 
@@ -56,6 +67,18 @@ public class superstructureAutos {
         Commands.parallel(
             new pivotPIDCommand(pivotingConstants.placePosition),
             new setWristPosition(wristConstants.cubeMidPose)
+        );
+
+    }
+
+
+    public static Command superPlaceCubeMid(){
+
+        return 
+        Commands.parallel(
+            placeCubeMid(),
+            new intakeCommand(true)
+
         );
 
     }

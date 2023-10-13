@@ -20,8 +20,6 @@ public class telescopicSubsystem extends SubsystemBase{
 
     private final RelativeEncoder relativeEncoder;
     
-    /**PID Controller */
-    private final ProfiledPIDController pidTelescopic;
 
     /**Subsystem's constructor */
     public telescopicSubsystem(){
@@ -44,10 +42,7 @@ public class telescopicSubsystem extends SubsystemBase{
         /**
          * Initialization for the PID Controller
          */
-        pidTelescopic = new ProfiledPIDController(
-            telescopicConstants.kP_Telescopic, 
-            telescopicConstants.kI_Telescopic, 
-            telescopicConstants.kD_Telescopic, telescopicConstants.constraints);  
+       
             
         resetEncoders();
     }
@@ -97,11 +92,38 @@ public class telescopicSubsystem extends SubsystemBase{
      */
     public void setGoal(double goal){
 
-        double pidOutput = pidTelescopic.calculate(getPosition());
+        if(getPosition() < goal){
+            motor.set(0.5);
+        }else {
+            motor.set(0);
+        }
+    }
 
-        pidTelescopic.setGoal(goal);
+    /**
+     * Whether the arm has returnes to its to rolled up position
+     * @return
+     */
+    public boolean isInGolePosition(double goal){
 
-        motor.set(pidOutput);
+        boolean isInGoal;
+
+        if(getPosition() > goal){
+            isInGoal = true;
+        }else {
+            isInGoal = false;
+        }
+
+        return isInGoal;
+    } 
+
+    public void sendToHome(){
+
+        if(getPosition() > 0.07){
+            motor.set(-0.5);
+        }else {
+            motor.set(0);
+        }
+
     }
 
     /**
@@ -120,22 +142,7 @@ public class telescopicSubsystem extends SubsystemBase{
         motor.set(velocity * 0.8);
     }
 
-    /**
-     * Whether the arm has returnes to its to rolled up position
-     * @return
-     */
-    public boolean isInGolePosition(){
-
-        boolean isInGoal;
-
-        if(pidTelescopic.getSetpoint().velocity == 0){
-            isInGoal = true;
-        } else {
-            isInGoal = false;
-        }
-
-        return isInGoal;
-    } 
+    
 
     
 }

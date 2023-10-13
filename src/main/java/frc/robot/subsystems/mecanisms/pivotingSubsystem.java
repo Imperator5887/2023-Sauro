@@ -141,14 +141,14 @@ public class pivotingSubsystem extends SubsystemBase {
    */
   public boolean isInGolePosition(){
 
-    boolean isHome;
+    boolean isInGoal;
     if(pidController.getSetpoint().velocity == 0.0 ){
-        isHome = true;
+        isInGoal = true;
     } else {
-        isHome = false;
+        isInGoal = false;
     }
 
-    return isHome;
+    return isInGoal;
   }
 
   @Override
