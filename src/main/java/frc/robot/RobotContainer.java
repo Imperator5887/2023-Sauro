@@ -18,6 +18,7 @@ import frc.robot.commands.mecanisms.telescopic.setTelescopicPosition;
 import frc.robot.commands.mecanisms.telescopic.setTelescopicVelocityCommand;
 import frc.robot.commands.mecanisms.wrist.setWristVelocityCommand;
 import frc.robot.commands.swerve.swerveDriveComando;
+import frc.robot.commands.swerve.autos.autos;
 import frc.robot.commands.swerve.limelight.autoAlign;
 import frc.robot.subsystems.mecanisms.pivotingSubsystem;
 import frc.robot.subsystems.mecanisms.telescopicSubsystem;
@@ -61,13 +62,14 @@ public class RobotContainer {
 
     /*wrist.setDefaultCommand(new setWristVelocityCommand(
       () -> controlPlacer.getRawAxis(1)
-    ));*/
-
+    ));
+/* */
      telescopic.setDefaultCommand(
       new setTelescopicVelocityCommand(
         () -> controlPlacer.getRawAxis(1)
       ));
 
+      
 
        pivot.setDefaultCommand(
         new pivotingCommand(
@@ -107,9 +109,9 @@ public class RobotContainer {
 
 
     /** SOLENOIID */
-    new POVButton(controlPlacer, 90).whileFalse(new setSolenoid(false));
+    new JoystickButton(controlPlacer, 7).whileFalse(new setSolenoid(true));
     
-    new POVButton(controlPlacer, 270).whileFalse(new setSolenoid(true));
+    new JoystickButton(controlPlacer, 8).whileFalse(new setSolenoid(false));
 
     /**AUTOALIGN */
     new JoystickButton(driverJoytick, 5).whileTrue(new autoAlign(swerveSubsystem, limelight, true));
@@ -120,4 +122,5 @@ public class RobotContainer {
     //return autonomousRoutines.placeCubeAndLeave();
     return null;
   }
+  
 }
