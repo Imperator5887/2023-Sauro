@@ -16,6 +16,7 @@ import frc.lib.util.limelightOffsets;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.Constants.limelightConstants;
+import frc.robot.Constants.limelightConstants.aprilTag;
 import frc.robot.subsystems.swerve.LimeLightObject;
 import frc.robot.subsystems.swerve.swerveSusbsystem;
 
@@ -26,7 +27,6 @@ public class autoAlign extends CommandBase {
     private final SlewRateLimiter xLimiter, yLimiter, giroLimiter;
     private final PIDController drivePID, strafePID, rotationPID;
     private final boolean alingToAprilTag;
-    private final limelightOffsets offsets;
     private final double driveOffset, strafeOffset, rotationOffset;
     
 
@@ -75,11 +75,10 @@ public class autoAlign extends CommandBase {
         /**
          * Offsets for the limelight
          */
-        this.offsets = limelight.getOffsets(alingToAprilTag);  
 
-        this.driveOffset = offsets.driveValue;
-        this.strafeOffset = offsets.strafeValue;
-        this.rotationOffset = offsets.rotationValue;
+        this.driveOffset = aprilTag.driveOffset;
+        this.strafeOffset = aprilTag.strafeOffset;
+        this.rotationOffset = aprilTag.rotationOffset;
 
         addRequirements(swerveSubsystem);
         
@@ -100,7 +99,7 @@ public class autoAlign extends CommandBase {
         
         
 
-        limelight.alingToAprilTag(alingToAprilTag);
+        //limelight.alingToAprilTag(alingToAprilTag);
         
         double velAvance = 0;
         double velStrafe = 0;

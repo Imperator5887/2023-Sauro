@@ -5,12 +5,17 @@
  */
 package frc.robot.commands.swerve.autos;
 
+import java.util.function.Supplier;
+
 import com.pathplanner.lib.PathConstraints;
 import com.pathplanner.lib.PathPlanner;
 import com.pathplanner.lib.PathPlannerTrajectory;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import frc.robot.commands.mecanisms.telescopic.setTelescopicVelocityCommand;
 import frc.robot.commands.swerve.limelight.autoAlign;
+import frc.robot.subsystems.mecanisms.solenoidSubsystem;
 import frc.utils.AutoUtils;
 import frc.utils.TrajectoryReader;
 
@@ -29,8 +34,7 @@ public class autos extends AutoUtils {
     public static Command alignAuto(){
 
         return Commands.sequence(
-            TrajectoryReader.readTrajectory(holonomic, true),
-            new autoAlign(swerve, limelight, true));
+            TrajectoryReader.readTrajectory(holonomic, true));
     }
 
     public static Command holonomic(){
@@ -41,6 +45,16 @@ public class autos extends AutoUtils {
         return Commands.sequence(
             TrajectoryReader.readTrajectory(defaultAuto, true)
         );
+    }
+
+    public static Command extendTelescopic(Supplier<Double> velocity){
+
+        if(velocity.get() >=0.1 || velocity.get() <= -0.1){}
+       return Commands.parallel(
+        new InstantCommand(
+            () -> solenoid.set(false), solenoid),
+        new setTelescopicVelocityCommand(velocity));
+
     }
 
 

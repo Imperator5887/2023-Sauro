@@ -7,6 +7,7 @@ import com.revrobotics.CANSparkMaxLowLevel.PeriodicFrame;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.lib.math.Functions;
 import frc.robot.Constants.telescopicConstants;
 
 /**Creates the subsystem for the telescopic arm */
@@ -139,6 +140,13 @@ public class telescopicSubsystem extends SubsystemBase{
      * @param velocity
      */
     public void setVelocity(double velocity){
+
+        if(relativeEncoder.getPosition() <= -90){
+         velocity = Functions.clamp(velocity, 1, 0.1);
+        }  else {
+            velocity = velocity;
+        }
+
         motor.set(velocity * 0.8);
     }
 
