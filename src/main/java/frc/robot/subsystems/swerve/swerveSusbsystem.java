@@ -169,16 +169,7 @@ public class swerveSusbsystem extends SubsystemBase {
     @Override
     public void periodic() {
         
-        SmartDashboard.putNumber("Absoluteposition 1", frontLeft.getAbsolutePosition());
-        SmartDashboard.putNumber("Absoluteposition 2", frontRight.getAbsolutePosition());
-        SmartDashboard.putNumber("Absoluteposition 3", rearLeft.getAbsolutePosition());
-        SmartDashboard.putNumber("Absoluteposition 4", rearRight.getAbsolutePosition());
-
-        SmartDashboard.putNumber("Relative Position 1", frontLeft.getTurnPosition());
-        SmartDashboard.putNumber("Relative Position 2", frontRight.getTurnPosition());
-        SmartDashboard.putNumber("Relative Position 3", rearLeft.getTurnPosition());
-        SmartDashboard.putNumber("Relative Position 4", rearRight.getTurnPosition());
-
+    
         SmartDashboard.putNumber("Giro Robot", getHeading());
 
         //Updating the odometry of the robot
@@ -196,8 +187,6 @@ public class swerveSusbsystem extends SubsystemBase {
         //Visualization of the field
         SmartDashboard.putData("Field", field);
 
-        //Debug info of the odometry
-        System.out.println(odometry.getPoseMeters());
          
 }
     

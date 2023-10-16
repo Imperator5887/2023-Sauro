@@ -89,9 +89,7 @@ public class wristSubsystem extends SubsystemBase {
     /**
      * SHUFFLBOARD
      */
-    SmartDashboard.putNumber("Wrist ABSOLUTE Position", getAbsolutePosition());
-    SmartDashboard.putNumber("Wrist RELATIVE Position", getPosition());
-    SmartDashboard.putNumber("OUTPUT WRIST", motor.getAppliedOutput());
+    SmartDashboard.putNumber("Wrist Position", getAbsolutePosition());
 
   }
 

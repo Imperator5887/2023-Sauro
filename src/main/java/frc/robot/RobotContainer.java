@@ -109,9 +109,9 @@ public class RobotContainer {
 
 
     /** SOLENOIID */
-    new JoystickButton(controlPlacer, 7).whileFalse(new setSolenoid(true));
+    new JoystickButton(controlPlacer, 7).whileFalse(new setSolenoid(false));
     
-    new JoystickButton(controlPlacer, 8).whileFalse(new setSolenoid(false));
+    new JoystickButton(controlPlacer, 8).whileFalse(new setSolenoid(true));
 
     /**AUTOALIGN */
     new JoystickButton(driverJoytick, 5).whileTrue(new autoAlign(swerveSubsystem, limelight, true));
@@ -122,5 +122,5 @@ public class RobotContainer {
     //return autonomousRoutines.placeCubeAndLeave();
     return null;
   }
-  
+
 }

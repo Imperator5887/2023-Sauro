@@ -9,9 +9,9 @@ public class idleIntake extends CommandBase {
    // private final boolean pickingCone;
    private final boolean pickedCone;
   /**  
-   * Creates a new ExampleCommand.
+   * Creates a new idleIntake Command.
    *
-   * @param subsystem The subsystem used by this command.
+   * @param pickedCone if the picked piece was a cone
    */
   public idleIntake(Boolean pickedCone) {
 

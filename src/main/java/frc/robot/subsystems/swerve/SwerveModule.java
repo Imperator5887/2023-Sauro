@@ -17,7 +17,6 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.util.SwerveModuleConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.ModuleConstants;
@@ -249,7 +248,6 @@ public class SwerveModule {
 
        //Set the turn motor position with PID
         turnMotor.set(turnPIDController.calculate(getTurnPosition(), state.angle.getRadians()));
-        SmartDashboard.putString("Modulo numero" + moduleNumber + "state", state.toString());
     }
 
     //Public method for stopping both motors
