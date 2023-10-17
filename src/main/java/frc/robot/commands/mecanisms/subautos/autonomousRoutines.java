@@ -1,3 +1,8 @@
+/**
+ * Writen by Armando Mac Beath
+ * 
+ * {@MÆTH}
+ */
 package frc.robot.commands.mecanisms.subautos;
 
 import javax.print.attribute.standard.Finishings;
