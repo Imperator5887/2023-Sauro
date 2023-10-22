@@ -13,6 +13,7 @@ import com.pathplanner.lib.PathPlannerTrajectory;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.robot.commands.mecanisms.telescopic.setTelescopicVelocityCommand;
 import frc.robot.commands.swerve.limelight.autoAlign;
 import frc.robot.subsystems.mecanisms.solenoidSubsystem;
@@ -21,7 +22,7 @@ import frc.utils.TrajectoryReader;
 
 public class autos extends AutoUtils {
 
-    private static PathPlannerTrajectory holonomic = PathPlanner.loadPath("New Path", new PathConstraints(1.5, 1));
+    private static PathPlannerTrajectory leaveComm = PathPlanner.loadPath("leaveCommunity", new PathConstraints(4, 3));
     private static PathPlannerTrajectory goForward = PathPlanner.loadPath("autoForward", new PathConstraints(3, 3));
     private static PathPlannerTrajectory defaultAuto = PathPlanner.loadPath("Default Auto", new PathConstraints(1, 1));
    
@@ -31,14 +32,14 @@ public class autos extends AutoUtils {
     }
 
 
-    public static Command alignAuto(){
+    public static Command leaveComm(){
 
         return Commands.sequence(
-            TrajectoryReader.readTrajectory(holonomic, true));
+            TrajectoryReader.readTrajectory(leaveComm, true));
     }
 
     public static Command holonomic(){
-        return Commands.sequence(TrajectoryReader.readTrajectory(holonomic, true),
+        return Commands.sequence(TrajectoryReader.readTrajectory(leaveComm, true),
         new autoAlign(swerve, limelight, true));
     }
     public static Command autoDefault(){
@@ -56,6 +57,47 @@ public class autos extends AutoUtils {
         new setTelescopicVelocityCommand(velocity));
 
     }
+
+    public static Command placeAndLeave(){
+
+        return Commands.parallel(
+            Commands.sequence(
+            new InstantCommand(
+                () ->  intake.setPiecePickingMode(true),
+                intake
+            ),
+            new InstantCommand(
+                () ->  intake.stop(),
+                intake
+            )
+            ),
+            Commands.waitSeconds(2),
+
+            leaveComm()
+            
+            );
+        
+    }
+
+    public static Command placeOnGround(){
+
+        return Commands.sequence(
+            new RunCommand(
+                () ->  intake.setPiecePickingMode(true),
+                intake
+            ).withTimeout(2),
+
+            Commands.waitSeconds(2),
+
+            leaveComm()
+    
+            
+            );
+        
+    }
+
+
+
 
 
     

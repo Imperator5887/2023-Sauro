@@ -140,7 +140,7 @@ public class Constants {
             public static boolean driveMotorInverted = true;
             public static boolean turningMotorInverted = false;
             public static int absoluteEncoderID =  4;
-            public static double absoluteEncoderOffsetRad = 3.16;
+            public static double absoluteEncoderOffsetRad = 2.2;
             public static boolean absoluteEncoderReversed = true; 
                   
             public static final SwerveModuleConstants constantes = 
@@ -271,14 +271,14 @@ public class Constants {
     
         
     
-        public static final double maxVelocity = 20;
-        public static final double maxAcceleration = 17;
+        public static final double maxVelocity = 24;
+        public static final double maxAcceleration = 21;
         public static final TrapezoidProfile.Constraints constraints = 
                         new TrapezoidProfile.Constraints(maxVelocity, maxAcceleration);
                     
     
-        public static final double pickingPose = 1.52;
-        public static final double homePosition = 0.02;
+        public static final double pickingPose = 1.45; //1.52
+        public static final double homePosition = 0.; // 0.02
         public static final double placePosition = 0.55;
         
 
@@ -318,7 +318,7 @@ public class Constants {
         public static TrapezoidProfile.Constraints constraints =
                       new TrapezoidProfile.Constraints(maxVelocity, maxAcceleration);
 
-        public static final double pickingPose = 0.38;
+        public static final double pickingPose = 0.40;
         public static final double cubeHighPose = 0.33;
         public static final double cubeMidPose = 0.43;
         public static final double homePose = 0.08;

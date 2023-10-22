@@ -11,10 +11,12 @@ import frc.robot.Constants.OIConstants;
 import frc.robot.commands.mecanisms.intake.idleIntake;
 import frc.robot.commands.mecanisms.intake.intakeCommand;
 import frc.robot.commands.mecanisms.pivoting.pivotingCommand;
+import frc.robot.commands.mecanisms.subautos.autonomousRoutines;
 import frc.robot.commands.mecanisms.subautos.superstructureAutos;
 import frc.robot.commands.mecanisms.telescopic.setSolenoid;
 import frc.robot.commands.mecanisms.telescopic.setTelescopicVelocityCommand;
 import frc.robot.commands.swerve.swerveDriveComando;
+import frc.robot.commands.swerve.autos.autos;
 import frc.robot.commands.swerve.limelight.autoAlign;
 import frc.robot.subsystems.mecanisms.pivotingSubsystem;
 import frc.robot.subsystems.mecanisms.telescopicSubsystem;
@@ -115,8 +117,8 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
-    //return autonomousRoutines.placeCubeAndLeave();
-    return null;
+    return autos.placeAndLeave();
+    //return superstructureAutos.superPlaceCubeMid();
   }
 
 }

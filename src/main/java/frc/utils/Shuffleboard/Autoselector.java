@@ -15,7 +15,7 @@ public class Autoselector {
     private static SendableChooser<Command> autoChooser = new SendableChooser<>();
 
     public Autoselector(){
-        autoChooser.addOption("Align Home", autos.alignAuto());
+        autoChooser.addOption("Align Home", autos.leaveComm());
         autoChooser.addOption("Default", autos.autoDefault());
 
         Shuffleboard.kShuffleboardTab.add(autoChooser);

@@ -88,6 +88,7 @@ public class wristSubsystem extends SubsystemBase {
      * SHUFFLBOARD
      */
     SmartDashboard.putNumber("Wrist Position", getAbsolutePosition());
+    SmartDashboard.putBoolean("Wrist At Goal?", isInGolePosition());
 
   }
 
@@ -168,7 +169,7 @@ public class wristSubsystem extends SubsystemBase {
   public boolean isInGolePosition(){
 
     boolean isInGoal;
-    if(pidController.getSetpoint().velocity == 0.0 ){
+    if(pidController.atGoal()){
         isInGoal = true;
     } else {
         isInGoal = false;

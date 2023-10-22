@@ -50,7 +50,7 @@ public class autonomousRoutines {
 
         return 
         
-        Commands.sequence(
+        Commands.parallel(
 
         superstructureAutos.superPlaceCubeMid(),
         

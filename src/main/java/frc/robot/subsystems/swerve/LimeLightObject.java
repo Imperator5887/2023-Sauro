@@ -9,6 +9,7 @@ package frc.robot.subsystems.swerve;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.lib.util.limelightOffsets;
 import frc.robot.Constants.limelightConstants.aprilTag;
@@ -82,17 +83,18 @@ public class LimeLightObject extends SubsystemBase{
             objectIsSeen = false;
           } 
 
-        /**SHUFFLEBOARD 
+        SmartDashboard.putNumber("LL-X", x);
         
-        SmartDashboard.putNumber("Yaw", yaw);
+        SmartDashboard.putNumber("LL-A", a);
 
-        SmartDashboard.putNumber("X", x);
+        SmartDashboard.putNumber("LL-Yaw", yaw);
+
+        
+        /**SHUFFLEBOARD 
         
         SmartDashboard.putNumber("S", s);
         
         SmartDashboard.putNumber("Y", y);
-        
-        SmartDashboard.putNumber("A", a);
         
         SmartDashboard.putBoolean("objetivo?", objectIsSeen);
        */ 

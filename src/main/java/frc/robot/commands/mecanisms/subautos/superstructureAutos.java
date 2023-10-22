@@ -81,7 +81,7 @@ public class superstructureAutos {
     public static Command superPlaceCubeMid(){
 
         return 
-        Commands.parallel(
+        Commands.sequence(
             placeCubeMid(),
             new intakeCommand(true)
 

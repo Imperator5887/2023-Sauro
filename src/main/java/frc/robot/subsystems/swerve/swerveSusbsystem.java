@@ -168,6 +168,17 @@ public class swerveSusbsystem extends SubsystemBase {
 
     @Override
     public void periodic() {
+
+        SmartDashboard.putNumber("ABSOLUTE MODULE 1", frontLeft.getAbsolutePosition());
+        SmartDashboard.putNumber("ABSOLUTE MODULE 2", frontRight.getAbsolutePosition());
+        SmartDashboard.putNumber("ABSOLUTE MODULE 3", rearLeft.getAbsolutePosition());
+        SmartDashboard.putNumber("ABSOLUTE MODULE 4", rearRight.getAbsolutePosition());
+        
+        SmartDashboard.putNumber("RELATIVE MODULE 1", frontLeft.getTurnPosition());
+        SmartDashboard.putNumber("RELATIVE MODULE 2", frontRight.getTurnPosition());
+        SmartDashboard.putNumber("RELATIVE MODULE 3", rearLeft.getTurnPosition());
+        SmartDashboard.putNumber("RELATIVE MODULE 4", rearRight.getTurnPosition());
+
         
     
         SmartDashboard.putNumber("Giro Robot", getHeading());

@@ -36,7 +36,7 @@ public class pivotingSubsystem extends SubsystemBase {
 
   /**Constructor of the system */
   public pivotingSubsystem() {
-
+  //pidController.atGoal();
     /**
      * Initialization of the motors 
      */
@@ -139,7 +139,7 @@ public class pivotingSubsystem extends SubsystemBase {
   public boolean isInGolePosition(){
 
     boolean isInGoal;
-    if(pidController.getSetpoint().velocity == 0.0 ){
+    if(pidController.atGoal()){
         isInGoal = true;
     } else {
         isInGoal = false;
@@ -153,6 +153,8 @@ public class pivotingSubsystem extends SubsystemBase {
 
     /**SHUFFLEBOARD */
     SmartDashboard.putNumber("Posicion Pivoteo", getPosition());
+    SmartDashboard.putBoolean("Pivotng At Goal?", isInGolePosition());
+
 
   }
 
