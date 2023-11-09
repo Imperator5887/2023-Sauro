@@ -119,7 +119,7 @@ public class swerveDriveComando extends CommandBase {
     } 
 
     @Override
-    public void end(boolean interrupted) {
+    public void end(boolean interrumpido) {
         swerveSubsystem.stopModules();
     }
 
