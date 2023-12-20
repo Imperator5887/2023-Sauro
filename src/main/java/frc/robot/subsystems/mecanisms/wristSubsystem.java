@@ -156,7 +156,9 @@ public class wristSubsystem extends SubsystemBase {
   public void setGoal(double desiredGoal){
 
     pidController.setGoal(desiredGoal);
+
     double pidOutput = pidController.calculate(absoluteEncoder.getPosition());
+
     
         motor.set(pidOutput); 
 

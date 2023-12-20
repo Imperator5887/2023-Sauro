@@ -28,6 +28,7 @@ public class autoAlign extends CommandBase {
     private final PIDController drivePID, strafePID, rotationPID;
     private final boolean alingToAprilTag;
     private final double driveOffset, strafeOffset, rotationOffset;
+    private final limelightOffsets offsets;
     
 
     /**
@@ -75,10 +76,11 @@ public class autoAlign extends CommandBase {
         /**
          * Offsets for the limelight
          */
+        offsets = limelight.getOffsets(alingToAprilTag);
 
-        this.driveOffset = aprilTag.driveOffset;
-        this.strafeOffset = aprilTag.strafeOffset;
-        this.rotationOffset = aprilTag.rotationOffset;
+        this.driveOffset = offsets.driveValue;
+        this.strafeOffset = offsets.strafeValue;
+        this.rotationOffset = offsets.rotationValue;
 
         addRequirements(swerveSubsystem);
         

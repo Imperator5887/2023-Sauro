@@ -145,7 +145,7 @@ public class swerveSusbsystem extends SubsystemBase {
     }
    
     /**
-     * Gett Kinematics
+     * Get Kinematics
      * @return the kinematics of the robor
      */
     public SwerveDriveKinematics getKinematics(){
