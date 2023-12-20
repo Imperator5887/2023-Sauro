@@ -7,10 +7,6 @@ package frc.robot.commands.mecanisms.subautos;
 
 import javax.print.attribute.standard.Finishings;
 
-import com.pathplanner.lib.PathConstraints;
-import com.pathplanner.lib.PathPlanner;
-import com.pathplanner.lib.PathPlannerTrajectory;
-
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.Constants.pivotingConstants;
@@ -33,7 +29,7 @@ public class autonomousRoutines {
     private final telescopicSubsystem telescopic;
     private final solenoidSubsystem solenoid;
 
-    private static PathPlannerTrajectory leaveCommunity = PathPlanner.loadPath("leaveCommunity", new PathConstraints(3.5, 1));  
+   // private static PathPlannerTrajectory leaveCommunity = PathPlanner.loadPath("leaveCommunity", new PathConstraints(3.5, 1));  
 
 
     public autonomousRoutines(){
@@ -58,9 +54,9 @@ public class autonomousRoutines {
 
         superstructureAutos.homePosition(),
 
-        Commands.waitSeconds(0.8),
+        Commands.waitSeconds(0.8)
 
-        TrajectoryReader.readTrajectory(leaveCommunity, true)
+       // TrajectoryReader.readTrajectory(leaveCommunity, true)
 
         );
 

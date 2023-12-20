@@ -7,9 +7,6 @@ package frc.robot.commands.swerve.autos;
 
 import java.util.function.Supplier;
 
-import com.pathplanner.lib.PathConstraints;
-import com.pathplanner.lib.PathPlanner;
-import com.pathplanner.lib.PathPlannerTrajectory;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -22,7 +19,7 @@ import frc.utils.TrajectoryReader;
 
 public class autos extends AutoUtils {
 
-    private static PathPlannerTrajectory leaveComm = PathPlanner.loadPath("leaveCommunity", new PathConstraints(4, 3));
+   /*  private static PathPlannerTrajectory leaveComm = PathPlanner.loadPath("leaveCommunity", new PathConstraints(4, 3));
     private static PathPlannerTrajectory goForward = PathPlanner.loadPath("autoForward", new PathConstraints(3, 3));
     private static PathPlannerTrajectory defaultAuto = PathPlanner.loadPath("Default Auto", new PathConstraints(1, 1));
    
@@ -95,7 +92,7 @@ public class autos extends AutoUtils {
             );
         
     }
-
+*/
 
 
 

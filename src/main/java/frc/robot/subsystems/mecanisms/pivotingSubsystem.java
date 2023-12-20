@@ -10,6 +10,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.math.controller.ProfiledPIDController;
+import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -33,6 +34,9 @@ public class pivotingSubsystem extends SubsystemBase {
 
   /**PID Controller */
   private final ProfiledPIDController pidController;
+
+  double goal;
+
 
   /**Constructor of the system */
   public pivotingSubsystem() {
@@ -95,9 +99,11 @@ public class pivotingSubsystem extends SubsystemBase {
    * @param goal
    */
   public void setDesiredPosition(double goal){
+    
+    pidController.setGoal(goal);  
         
     double pidOutput = pidController.calculate(relativeEncoder.getPosition());
-    pidController.setGoal(goal);  
+
    
     motors.set(pidOutput); 
   }
@@ -136,24 +142,23 @@ public class pivotingSubsystem extends SubsystemBase {
    * Whether the arm has returned to rolledup position
    * @return is in home?
    */
-  public boolean isInGolePosition(){
+  public boolean isInGolePosition(double position){
+    pidController.setGoal(position);
+   
+    goal = position;
 
-    boolean isInGoal;
-    if(pidController.atGoal()){
-        isInGoal = true;
-    } else {
-        isInGoal = false;
-    }
 
-    return isInGoal;
+    return pidController.atGoal();
   }
 
   @Override
   public void periodic() {
 
+
+
     /**SHUFFLEBOARD */
     SmartDashboard.putNumber("Posicion Pivoteo", getPosition());
-    SmartDashboard.putBoolean("Pivotng At Goal?", isInGolePosition());
+    SmartDashboard.putBoolean("Pivotng At Goal?", isInGolePosition(goal));
 
 
   }
