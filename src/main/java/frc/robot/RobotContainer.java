@@ -102,11 +102,9 @@ public class RobotContainer {
     new JoystickButton(controlPlacer, 5).whileFalse(new idleIntake(true));
 
 
-
     new JoystickButton(controlPlacer, 6).whileTrue(new intakeCommand(false));
 
     new JoystickButton(controlPlacer, 6).whileFalse(new idleIntake(false));
-
 
     /** SOLENOIID */
     new JoystickButton(controlPlacer, 7).whileFalse(new setSolenoid(false));
